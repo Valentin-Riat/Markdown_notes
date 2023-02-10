@@ -1,5 +1,6 @@
 # Python
 
+## basics
 [Lien du cours (Openclassroom)](https://openclassrooms.com/fr/courses/235344-apprenez-a-programmer-en-python)
 
 ### Types et arithmétique
@@ -73,7 +74,8 @@ del lst[1]        #delete l'élément 1 de la liste
 ```
 
 > taper `help(list)` pour plus d'info
-> ###Dictionnaires
+
+###Dictionnaires
 > taper `help(dict)` pour plus d'info
 
 ```python
@@ -235,9 +237,11 @@ B hérite des méthodes de A mais il faut déclarer tous les attributes dans le 
 
 [Lien OpenClassroom](https://openclassrooms.com/fr/courses/235344-apprenez-a-programmer-en-python/233261-decouvrez-la-boucle-for)
 
+
+
 # Modules standards Python
 
-### Expressions régulières (regex)
+## Expressions régulières (regex)
 
 | Signes      | signification                                           | regex : correspond       |
 |:-----------:| ------------------------------------------------------- |:------------------------ |
@@ -262,7 +266,7 @@ re.sub('^0([0-9]{2})', '+41\\1', '022 342 15 33') # renvoie '+4122 342 15 33'
 
 > *re.sub(regex, str_remplacement, str_a_changer)* : les parenthèses dans la regex répresentent les groupes qui sont référer plus tard (par `\\1`, `\\2`, etc) dans le string de remplacement si besoin 
 
-### OS
+## OS
 
 Pour déplacer et copier des fichier, utiliser `import shutil`
 
@@ -272,7 +276,7 @@ os.chdir(C:/Users/)
 list = os.listdir() # renvoie une liste des noms des fichier dans le dossier courant (ici C:/Users/) sous forme de strings
 ```
 
-### Time
+## Time
 
 ```python
 import time
@@ -281,9 +285,9 @@ time.localtime() # renvoie un objet contenant des infos comme la date, l'année 
 time.sleep(10.5) # met le programme en pause pendant 10.5 secondes 
 ```
 
-### Programmation système
+## Programmation système
 
-#### les flux standard
+### les flux standard
 
 ```python
 import sys
@@ -295,7 +299,7 @@ sys.stdout = sys.__stdout__  # rétabli
 sys.stderr = sys.__stderr__  # rétabli
 ```
 
-#### Les signaux
+### Les signaux
 
 ils sont utilisé pour la communiquation **système <-> programme** et **programme <-> programme**.
 Notre programme peut intercepter des signaux et réagir en conséquence.
@@ -310,7 +314,7 @@ def fermer(signal, frame) :    # les deux arguments sont obligatoires
 signal.signal(signal.SIGINT, fermer)   # lie le signal à la fonction 'fermer' 
 ```
 
-#### Interpreter les arguments de la console de commande
+### Interpreter les arguments de la console de commande
 
 `sys.argv` est une liste contenant le nom du programme puis les arguments passé.
 Pour aller plus loin, il faut utiliser argparse :
@@ -333,7 +337,7 @@ n      = args.fin
 shift  = args.shift
 ```
 
-#### Envoyer des commandes au système
+### Envoyer des commandes au système
 
 `os.system('ls')` envoie une commande au système mais ne permet pas de voir le retour de la commande.
 `cmd = os.popen('ls')` permet de voir le retour d'une commande en faisant `cmd.read()`.
@@ -411,6 +415,12 @@ np.vstack([a,b])    # vertical stack
 nb.hstack([a,b])    # horizontal stack
 ```
 
+### FFT
+```python
+sig_fft = np.fft.fft(signal, signal.size)
+freq = np.fft.fftfreq(signal.size,d)
+```
+
 ### Opération sur les listes
 
 ```python
@@ -420,11 +430,14 @@ where(tab < 10)  # renvoie une liste contenant les indices des cases respectant 
 ```
 
 #Mathplotlib
-
+[cheatsheets](https://matplotlib.org/cheatsheets/)
 ```python
 import matplotlib as plt
 ```
-
+```python
+plt.plot(x,y)
+plt.show()
+```
 ```python
 #Plots zeros and poles (in var z and p) on a graph
 t = np.linspace(0, 2*np.pi, 100)
