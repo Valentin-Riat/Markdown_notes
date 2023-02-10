@@ -19,14 +19,27 @@ Pour ajouter la clef au github copier le texte de "id_ed25519.pub" et coller dan
 
 ## Command pour créer un repository
 
+### Setup initial
 ```bash
 git config --global user.name "John Doe"            # --global to have
 git config --global user.email johndoe@example.com  #  it set for all repo
-git init  # create the git repo
-git remote add origin <url> # add a remote repo with name origin
+```
 
+### Crée un repository en local puis l'uploader
+
+Créer le remote puis taper ceci dans le dossier où l'on créer le git repository
+```bash
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin [addr du remote (ssh)]
+git push -u origin main
+```
+### Downloader un remote repository 
+```bash
 git clone <url> # create a local repo from an existing remote one
-git remote add <short_name> <url> # create a short name for the url
+git remote add <short_name> <url> # create a short name for the url, generally the short name is "origin"
 ```
 
 ## Command de base :
