@@ -6,7 +6,7 @@ D'abord, créer la pair de clefs (utiliser le mail du compte github)
 ``` bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
-ou si ed25519 n'est pas suporter : 
+ou si ed25519 n'est pas supporter : 
 ``` bash
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
