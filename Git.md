@@ -2,9 +2,22 @@
 
 ## Créer les ssh key
 
+D'abord, créer la pair de clefs (utiliser le mail du compte github)
+``` bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+ou si ed25519 n'est pas suporter : 
+``` bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
 
+Ensuite l'emplacement et le nom du fichier est demander (appuier sur enter pour laisser par defaut) 
 
-### Command pour créer un repository
+Enfin un mot de passe est demander (appuier sur enter pour mettre aucun mot de passe)
+
+Pour ajouter la clef au github copier le texte de "id_ed25519.pub" et coller dans github.com -> Settings -> ssh -> New SSH key
+
+## Command pour créer un repository
 
 ```bash
 git config --global user.name "John Doe"            # --global to have
@@ -16,7 +29,7 @@ git clone <url> # create a local repo from an existing remote one
 git remote add <short_name> <url> # create a short name for the url
 ```
 
-### Command de base :
+## Command de base :
 
 ```bash
 git status # see the files staged or committed
@@ -28,7 +41,7 @@ git push origin main # push the changes to the branch main to the remote reposit
 git pull origin main # pulls the changes from remote to local
 ```
 
-### Commandes pour les branches
+## Commandes pour les branches
 
 ```bash
 git branch #dislpays all the branches (* to indicate the current one)
@@ -42,9 +55,9 @@ git checkout main
 git merge branch1 
 ```
 
-### Commandes pour annuler un changement
+## Commandes pour annuler un changement
 
-#### Avant d'avoir commit
+### Avant d'avoir commit
 
 ```bash
 git stash # annule les changement fait mais les sauvgardes dans le "stash"
@@ -57,7 +70,7 @@ git stash drop <name> # supprime les changement du stash
 
 Si < name > n'est pas spécifier, c'est la dernière entrée qui est choisie.
 
-#### Après avoir commit
+### Après avoir commit
 
 ```bash
 git reset --hard HEAD^ # reset le dossier dans son état avant le dernier commit
@@ -66,7 +79,7 @@ git reset --hard <name> # reset le dossier dans son état avant le commit <name>
 git reset --soft <name> # permet de voir l'état du code au commit <name> sans rien supprimer
 ```
 
-### Merge confilct avec des fichiers binaires
+## Merge confilct avec des fichiers binaires
 
 ```bash
 git merge branch1 # va mettre message d'erreur
