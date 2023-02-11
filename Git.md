@@ -33,13 +33,13 @@ git init
 git add .
 git commit -m "first commit"
 git branch -M main
-git remote add origin [addr du remote (ssh)]
+git remote add <short_name> <url du remote (ssh)> # create a short name for the url, generally the short name is "origin"
 git push -u origin main
 ```
 ### Downloader un remote repository 
 ```bash
+git cd <dossier où le projet apparaitera> # ne pas créer le dossier du projet, il se créé lors du clone
 git clone <url> # create a local repo from an existing remote one
-git remote add <short_name> <url> # create a short name for the url, generally the short name is "origin"
 ```
 
 ## Command de base :
