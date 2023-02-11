@@ -276,6 +276,8 @@ os.chdir(C:/Users/) # change directory to c:\users\
 os.getcwd() # returns the directory from which the script is run (not always the file path)
             # the file path is contained in the variable : __file__
 list = os.listdir() # renvoie une liste des noms des fichier dans le dossier courant (ici C:/Users/) sous forme de strings
+os.remove("file.txt") # supprime le fichier
+os.rename("old_name.txt", "new_name.txt")
 
 os.path.abspath("c:/Users/") # returns "c:\Users\", good for cross-platfrom compatibility
 os.path.dirname("c:/Users/filename.txt") # returns "c:/Users/"
@@ -322,6 +324,8 @@ signal.signal(signal.SIGINT, fermer)   # lie le signal à la fonction 'fermer'
 
 ### Interpreter les arguments de la console de commande
 
+[Documentation](https://docs.python.org/3/library/argparse.html)
+
 `sys.argv` est une liste contenant le nom du programme puis les arguments passé.
 Pour aller plus loin, il faut utiliser argparse :
 
@@ -335,6 +339,8 @@ parser.add_argument('file', type=str, help="nom générique des fichiers à modi
 parser.add_argument('final_file', type=str, help ="nom générique de fichier final") 
 parser.add_argument('fin', type=int, help = "indice par lequel le script va finir")
 parser.add_argument('shift', type=int, help= "chiffre qui va s'aditionner à l'indice initial pour créer l'indice final")
+parser.add_argument('-n','--number') # si -n 8 est specifier, args.number vaudra 8
+parser.add_argument('-o','--overwrite', action='store_true') # si -o est specifier, args.overwrite sera True
 args = parser.parse_args()
 
 fname  = args.file
@@ -342,6 +348,8 @@ ffname = args.final_file
 n      = args.fin
 shift  = args.shift
 ```
+
+La fonction `add_argument~
 
 ### Envoyer des commandes au système
 
@@ -458,6 +466,21 @@ plt.title("Pôles et zéros")
 plt.xlabel("Réel")
 plt.ylabel("Imaginaire")
 ```
+
+# Pikepdf
+[Documentation](https://pikepdf.readthedocs.io/en/latest/tutorial.html#)
+
+Open a pdf and rotate some pages
+```python
+with pikepdf.Pdf.open("filename.pdf") as pdf: # opens the pdf
+
+    pdf.pages[0].Rotate = 90  # rotate page 1 clockwise
+    pdf.pages[1].Rotate = -90 # rotate page 2 counterclockwise
+    pdf.pages[4].Rotate = 180 # rotate page 5 of 180°
+
+    pdf.save("filename_rotated.pdf") # saves the modified file (overwriting the initial file is not possible)
+```
+
 
 #PyPDF2
 
