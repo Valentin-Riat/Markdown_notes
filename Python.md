@@ -272,8 +272,14 @@ Pour déplacer et copier des fichier, utiliser `import shutil`
 
 ```python
 import os
-os.chdir(C:/Users/)
+os.chdir(C:/Users/) # change directory to c:\users\
+os.getcwd() # returns the directory from which the script is run (not always the file path)
+            # the file path is contained in the variable : __file__
 list = os.listdir() # renvoie une liste des noms des fichier dans le dossier courant (ici C:/Users/) sous forme de strings
+
+os.path.abspath("c:/Users/") # returns "c:\Users\", good for cross-platfrom compatibility
+os.path.dirname("c:/Users/filename.txt") # returns "c:/Users/"
+file_path = os.path.dirname(__file__)+"/" # file_path is the path to the file without the file name
 ```
 
 ## Time
@@ -285,7 +291,7 @@ time.localtime() # renvoie un objet contenant des infos comme la date, l'année 
 time.sleep(10.5) # met le programme en pause pendant 10.5 secondes 
 ```
 
-## Programmation système
+## Programmation système (sys)
 
 ### les flux standard
 
