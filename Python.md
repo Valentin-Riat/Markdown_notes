@@ -66,9 +66,10 @@ str = ''.join(list) #join une liste de string en un unique string
 ```python
 lst = [1,10,100]
 lst.append(10)    # ajoute un élément à la fin
-lst.insert(1, 5)    # insert '5' à la place de l'indice 1 (indice 1 décalé vers la fin)
-lst.expend(lst2)    #insert lst2 à la fin de lst
+lst.insert(1, 5)    # insert '5' à la place de l'indice 1 (indice est 1 décalé vers la fin)
+lst.extend(lst2)    #insert lst2 à la fin de lst
 del lst[1]        #delete l'élément 1 de la liste
+lst[0], lst[4] = (lst[4], lst[0]) # swap les elements 0 et 4
 
 [elem**2 for elem in lst if elem < 100]    # renvoie une list correspondante à lst mais avec tous ces élément inférieur à 100 au carré.
 ```
@@ -284,6 +285,15 @@ os.path.dirname("c:/Users/filename.txt") # returns "c:/Users/"
 file_path = os.path.dirname(__file__)+"/" # file_path is the path to the file without the file name
 ```
 
+Pour trouver tous fichier qui match une expression
+```python
+from glob import glob
+
+list_of_file = glob('*.pdf') # retourne une liste de tous les fichiers du dossier qui sont des pdf
+list_of_file = glob('*.pdf', recursive=True) # regarde aussi dans les sous-dossiers (peut prendre beaucoup de temps si beaucoup de sous-dossier)
+```
+
+
 ## Time
 
 ```python
@@ -470,7 +480,7 @@ plt.ylabel("Imaginaire")
 # Pikepdf
 [Documentation](https://pikepdf.readthedocs.io/en/latest/tutorial.html#)
 
-Open a pdf and rotate some pages
+## Open a pdf and rotate some pages
 ```python
 with pikepdf.Pdf.open("filename.pdf") as pdf: # opens the pdf
 
@@ -480,6 +490,32 @@ with pikepdf.Pdf.open("filename.pdf") as pdf: # opens the pdf
 
     pdf.save("filename_rotated.pdf") # saves the modified file (overwriting the initial file is not possible)
 ```
+
+## Modifier les pages d'un PDF
+
+Une fois le pdf ouvert, l'objet `pdf.pages` se comport comme une liste, on peut alors les manipuler facilement :  
+```python
+with pikepdf.Pdf.open("filename.pdf") as pdf: # opens the pdf
+
+    pdf.pages.reverse()  # inverse l'ordre des pages
+    pdf.pages.append(10) # ajoute un élément à la fin
+    pdf.pages.insert(1, other_pdf.pages[0, 2]) # insert les pages 1 et 2 de 'otherpdf' à l'indice 1 (l'indice 1 du pdf est décalé vers la fin)
+    pdf.pages.extend(other_pdf.pages) #insert un autre pdf à la fin du premier
+    del pdf.pages[1]     #delete la page 2
+    pdf.pages[0], pdf.pages[4] = (pdf.pages[4], pdf.pages[0]) # swap les pages 1 et 5
+
+
+    ###########################################
+    ## Don't forget to do this before saving ##
+    ##      if multiple pdf where used       ##
+    ###########################################
+    pdf.remove_unreferenced_resources()
+    pdf.pdf_version = max(pdf.pdf_version, other_pdf.pdf_version)
+
+    pdf.save("filename_rotated.pdf") # saves the modified file (overwriting the initial file is not possible)
+```
+
+Pour voir le numéro de la page (pour les pdf utilisant des chiffes romains par exemple) : `pdf.pages[0].label` cela renvoie un string
 
 
 #PyPDF2
