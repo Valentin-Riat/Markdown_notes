@@ -298,7 +298,7 @@ list_of_file = glob('*.pdf', recursive=True) # regarde aussi dans les sous-dossi
 
 ```python
 import time
-time.time()      # donne les secondes depuis UNIX EPOCH
+time.time()      # donne les secondes depuis UNIX EPOCH (1 janv. 1970)
 time.localtime() # renvoie un objet contenant des infos comme la date, l'année ...
 time.sleep(10.5) # met le programme en pause pendant 10.5 secondes 
 ```
@@ -365,7 +365,7 @@ La fonction `add_argument~
 
 `os.system('ls')` envoie une commande au système mais ne permet pas de voir le retour de la commande.
 `cmd = os.popen('ls')` permet de voir le retour d'une commande en faisant `cmd.read()`.
-C'est commande sont exécutée dans un environnement séparé (faire 'sleep 5' n’arrêtera pas le programme pendant 5 secondes)
+Ces commande sont exécutée dans un environnement séparé (faire 'sleep 5' n’arrêtera pas le programme pendant 5 secondes)
 
 # Panda
 
