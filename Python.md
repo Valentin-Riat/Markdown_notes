@@ -7,12 +7,20 @@
 
 > Taper `type(variable)` pour savoir le type d'une variable.
 
-**Division entière**
+**base**
 
 ```python
 10**2        # 10 puissance 2
 10/3         # division à virgule (= 3.333...)
 10//3        # division euclidienne (= 3)
+```
+
+```python
+max(lst_of_num) # retourne le plus grand nombre de la list
+max(lst_of_lst, key=len) # retourne la sous-liste la plus grande 
+
+from operator import attrgetter
+max(lst_of_objects, key=attrgetter('capacity')) # retourne l'objet dont l'attibut 'capacity' est le plus grand 
 ```
 
 ### String
@@ -59,6 +67,22 @@ str = ''.join(list) #join une liste de string en un unique string
 
 (sinon taper `help(str)`)
 
+### ANSI codes with strings
+
+An ANSI escape code can be inserted into a string to modify it
+
+color codes  :
+
+|Color  | ANSI code | 
+|:-     |:-  |
+|Violet |"\033[95m"|
+|Blue   |"\033[94m"|
+|Green  |"\033[32m"|
+|Red    |"\033[91m"|
+|Yellow |"\033[1;33m"|
+|Gray   |"\033[90m"|
+|Reset  |"\033[0m"|
+
 ### Listes
 
 > contrairement aux string, les méthodes de list modifie les objets eux même
@@ -72,6 +96,8 @@ del lst[1]        #delete l'élément 1 de la liste
 lst[0], lst[4] = (lst[4], lst[0]) # swap les elements 0 et 4
 
 [elem**2 for elem in lst if elem < 100]    # renvoie une list correspondante à lst mais avec tous ces élément inférieur à 100 au carré.
+
+any(elem == 1 for elem in lst) # renvoie true si un élement de lst est égal à 1
 ```
 
 > taper `help(list)` pour plus d'info
