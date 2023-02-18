@@ -38,6 +38,10 @@ type ?filename to find a file
 type =1+1 to use calculator
 type %% to use unit convertor (100 hp(i) to kw)
 
+
+
+Don't forget to go in the parameters under unit converter and select *integate in general results*
+
 ## Sysinternals
 [see here](https://learn.microsoft.com/en-us/sysinternals/)
 
