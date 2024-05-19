@@ -30,6 +30,7 @@ max(lst_of_objects, key=attrgetter('capacity')) # retourne l'objet dont l'attibu
 ```python
 str1 = "abc' \" abc"    # correspond à : abc' " abc
 str2 = 'l\'epfl'    #correspond à : l'epfl
+str3 = str1+str2    #correspond à : abc' " abcl'epfl
 ```
 
 **Misc strings**
@@ -264,7 +265,11 @@ B hérite des méthodes de A mais il faut déclarer tous les attributes dans le 
 
 [Lien OpenClassroom](https://openclassrooms.com/fr/courses/235344-apprenez-a-programmer-en-python/233261-decouvrez-la-boucle-for)
 
+### Create your own library
 
+1. make a file with all the functions of the lib.
+1. put this file in the Lib folder of the python install files (probably at _C:\Users\Valentin\AppData\Local\Programs\Python\Python310\\_)
+1. to import your lib, use `import filename`
 
 # Modules standards Python
 
@@ -308,7 +313,7 @@ os.rename("old_name.txt", "new_name.txt")
 
 os.path.abspath("c:/Users/") # returns "c:\Users\", good for cross-platfrom compatibility
 os.path.dirname("c:/Users/filename.txt") # returns "c:/Users/"
-file_path = os.path.dirname(__file__)+"/" # file_path is the path to the file without the file name
+file_path = os.path.dirname(os.path.realpath(__file__)) # file_path is the path to the file without the file name
 ```
 
 Pour trouver tous fichier qui match une expression
@@ -359,6 +364,17 @@ signal.signal(signal.SIGINT, fermer)   # lie le signal à la fonction 'fermer'
 ```
 
 ### Interpreter les arguments de la console de commande
+
+#### La façon simple
+
+```python
+import sys
+
+sys.argv[0]  # contient le nom du programme
+sys.argv[1:] # list des argument passé au programme
+```
+
+#### La façon clean
 
 [Documentation](https://docs.python.org/3/library/argparse.html)
 
