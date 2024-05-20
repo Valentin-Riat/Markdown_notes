@@ -50,6 +50,7 @@ str.upper()        #met tout en majuscule
 str.capitalize()    #met la première lettre en majuscule
 str.strip()        #enlève tous les espaces au début et à la fin d'une chaine
 str.center(10)        #ajoute des espaces au début et à la fin pour obtenir la taille de chaine en arg
+str.replace(" ", ",") # Remplace les espaces par des virgules 
 "bla {0} bla {1}".format(str1, str2) # remplace {0} par str1 et {2} par str2
 ```
 
@@ -282,6 +283,7 @@ B hérite des méthodes de A mais il faut déclarer tous les attributes dans le 
 | *           | le char précédant peut ce trouver 0, 1, ou plus de fois | ab* : abc, abbc, ac      |
 | +           | le char précédant peut ce trouver 1 ou plus de fois     | ab+ : abc, abbc, ~~ac~~  |
 | ?           | le char précédant peut ce trouver 0 ou 1 fois           | ab? : abc, ~~abbc~~, ac  |
+| .           | match n'import quel character                           | .b  : abc, cbc, ~~bc~~, ~~aa~~ |
 | {3}         | le char précédant ce trouve 3 fois                      | e{2} : aee ~~ae~~        |
 | {1,3}       | le char précédant ce trouve entre 1 et 3 fois           |                          |
 | {,3} / {3,} | le char précédant ce trouve au max/min trois fois       |                          |
@@ -289,6 +291,8 @@ B hérite des méthodes de A mais il faut déclarer tous les attributes dans le 
 | [A-Za-z0-9] | le char peut être une lettre ou un chiffre              |                          |
 | ()          | appliquer un des controles si dessus à plusieurs char   | (ab){2} : abab           |
 |             |                                                         |                          |
+
+Pour match in character spécial comme . ou ?, il faut écrire \. ou \?
 
 ```python
 import re
