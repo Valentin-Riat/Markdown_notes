@@ -157,6 +157,12 @@ services:
 
 To view and check the renewal dates for Let's Encrypt certificates, use sudo certbot certificates. To manually renew all certificates, run sudo certbot renew.
 
+# Setting up fail2ban
+
+What to do after the docker is up and running
+
+1) 
+
 # Setting up the VPN
 
 For the Synology NAS, there already exists a first party app call VPN server to make a VPN server. Using this, the server is configured to use the OpenVPN protocol. The following options are used :
