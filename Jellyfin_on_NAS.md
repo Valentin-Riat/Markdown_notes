@@ -1,5 +1,9 @@
 # Jellyfin on docker on a NAS
 
+## To do to setup
+
+ - Open port on the router
+
 [Tuto for setting up jellyfin on a Synology NAS with hardware acceleration](https://www.wundertech.net/how-to-set-up-jellyfin-on-a-synology-nas/)
 
 ## Activate hardware acceleration
@@ -159,9 +163,23 @@ To view and check the renewal dates for Let's Encrypt certificates, use sudo cer
 
 # Setting up fail2ban
 
-What to do after the docker is up and running
+Problem : the docker image (`linuxserver/fail2ban`) uses the `nf_table` version of the `iptables` and the synology DSM 7.2.1 uses `iptables-legacy`
+=> solved using `crazymax/fail2ban` image instead.
 
-1) 
+Problem : when trying to ban, fail2ban uses REJECT which is not in the kernel
+=> solved by changing to DROP in the action.d folder
+
+Problem : fail2ban bans an ip but you can still connect with said ip
+=> solved the chain in which fail2ban writes to ban must be INPUT if the docker network setup is 'host' (or if no docker) 
+
+(might be neccessary to enable the firewall of the NAS so that fail2ban works)
+(in the `jail.d/fellyfin.local` file the chain must be changed according to the networking mode of docker)
+
+usefull fail2ban commands:
+
+fail2ban-client status jellyfin 
+fail2ban-client set jellyfin unbanip IPADDR
+fail2ban-client set jellyfin banip IPADDR
 
 # Setting up the VPN
 
@@ -193,6 +211,7 @@ The Swisscom router was configured to enable port forwarding between port 1194 t
 ``` shell
 docker container logs [-f (follow) -t(show timestamp) --since] Container
 docker export my-container > container-files.tar
+docker exec -it <container-name> /bin/bash # get a new bash in the container and attach to it
 netstat -tnul | grep -E "RegEx to fine the port you want e.g. :80"
 grep -l "string" path1/* # prints the path of all files in path1/ where a line matches "string" 
 sed -i -E -e 's/old_str/new_str/g' filnames # subsitute every occurence of old_str for new_str (old_str is a regex)
