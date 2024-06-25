@@ -163,14 +163,29 @@ To view and check the renewal dates for Let's Encrypt certificates, use sudo cer
 
 # Setting up fail2ban
 
-Problem : the docker image (`linuxserver/fail2ban`) uses the `nf_table` version of the `iptables` and the synology DSM 7.2.1 uses `iptables-legacy`
+**Problem :** the docker image (`linuxserver/fail2ban`) uses the `nf_table` version of the `iptables` and the synology DSM 7.2.1 uses `iptables-legacy`
 => solved using `crazymax/fail2ban` image instead.
 
-Problem : when trying to ban, fail2ban uses REJECT which is not in the kernel
+**Problem :** when trying to ban, fail2ban uses REJECT which is not in the kernel
 => solved by changing to DROP in the action.d folder
 
-Problem : fail2ban bans an ip but you can still connect with said ip
+**Problem :** fail2ban bans an ip but you can still connect with said ip
 => solved the chain in which fail2ban writes to ban must be INPUT if the docker network setup is 'host' (or if no docker) 
+
+**Problem :** fail2ban scans the specified folder for logs once and then doesn't check again if log files have been added/removed (like on jellyfin where there is one logfile per day)
+=> solved by running this script to the host machine :
+
+``` shell
+#!/bin/bash
+
+# set container and output file path variables
+container=jellyfin
+logging_output_path=/home/docker/jellyfin/container.log 
+
+# run tail on container log to output file in background
+docker logs -f $container &> $logging_output_path &
+```
+and redirecting the fail2ban to this logfile
 
 (might be neccessary to enable the firewall of the NAS so that fail2ban works)
 (in the `jail.d/fellyfin.local` file the chain must be changed according to the networking mode of docker)
