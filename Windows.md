@@ -56,4 +56,6 @@ Usefull poweruser stuff like a better task manager called *Process explorer*
 
 `winget install [program]` can be used to install windows programs using the command line
 
+## Youtube downloader on the commande line
 
+yt-dlp -o '~/Downloads/%(title)s' -x --audio-format mp3 https://www.youtube.com/playlist?list=PLzhgwxkDbmnKJdmq3G2endxvulrSAy14s
