@@ -41,26 +41,21 @@ git push -u origin main
 git cd <dossier où le projet apparaitera> # ne pas créer le dossier du projet, il se créé lors du clone
 git clone <url> # create a local repo from an existing remote one
 ```
-## que faire si le gitignore est ajouté après que les fichiers soit push to remote
+## Que faire si le gitignore est ajouté après que les fichiers soit push to remote
 
-Step 1:
-Remove all the files in the repository.
+Steps :
+1. Remove all the files in the repository.
+2. Re-add everything, commit and push
+
 ```bash
 git rm -r --cached .
-```
-rm is the remove command, adding -cached allow us to remove the files from the index. Our files are still present.
-
-Step 2:
-Re-add everything, commit and push
-
-The next step is to re-add/track our files. By doing this, the files in the . gitignore file will not be tracked.
-
-This is done by:
-```bash
 git add .
 git commit -m "gitignore fix"
 git push origin main
 ```
+
+rm is the remove command, adding -cached allow us to remove the files from the index. Our files are still present.
+Then when we re-add everything, the items in the .gitignore will not be tracked.
 
 ## Command de base :
 
@@ -126,4 +121,5 @@ git checkout branch1 somefile.dll # Récupère le fichier de l'autre branch
 git add somefile.dll 
 git commit –m “using the file from branch1”
 ```
+
 
